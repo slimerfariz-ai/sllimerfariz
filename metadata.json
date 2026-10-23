@@ -1,0 +1,10 @@
+{
+  "name": "Compliance LP KawanLama 2",
+  "description": "A professional Daily Checklist and Observation tool for Loss Prevention and Operations. Features AI-powered report generation and trend analysis.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

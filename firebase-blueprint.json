@@ -1,0 +1,134 @@
+{
+  "entities": {
+    "InspectionReport": {
+      "title": "InspectionReport",
+      "description": "Laporan hasil inspeksi harian Loss Prevention beserta skor kepatuhan dan observasi temuan.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID unik dokumen laporan inspeksi",
+          "maxLength": 128
+        },
+        "date": {
+          "type": "string",
+          "description": "Tanggal dan waktu pelaksanaan inspeksi",
+          "maxLength": 64
+        },
+        "store": {
+          "type": "string",
+          "description": "Kode dan nama toko yang diinspeksi",
+          "maxLength": 256
+        },
+        "lpSupervisor": {
+          "type": "string",
+          "description": "Nama LP Supervisor yang bertanggung jawab",
+          "maxLength": 128
+        },
+        "nik": {
+          "type": "string",
+          "description": "Nomor Induk Karyawan pemeriksa",
+          "maxLength": 64
+        },
+        "complianceScore": {
+          "type": "number",
+          "description": "Skor persentase kepatuhan (0 - 100)"
+        },
+        "aiSummary": {
+          "type": "string",
+          "description": "Ringkasan evaluasi hasil inspeksi oleh AI",
+          "maxLength": 5000
+        },
+        "googleSpreadsheetUrl": {
+          "type": "string",
+          "description": "URL tautan Google Spreadsheet pada Google Drive",
+          "maxLength": 500
+        },
+        "googleSpreadsheetId": {
+          "type": "string",
+          "description": "ID Google Spreadsheet",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID pengguna Firebase Authentication yang menginput laporan",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Waktu pembuatan laporan di database",
+          "maxLength": 64
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Waktu pembaruan terakhir laporan di database",
+          "maxLength": 64
+        }
+      },
+      "required": ["id", "date", "store", "nik", "complianceScore"]
+    },
+    "TestConnection": {
+      "title": "TestConnection",
+      "description": "Dokumen uji konektivitas Firebase Firestore saat startup.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status koneksi pengujian",
+          "maxLength": 64
+        }
+      }
+    },
+    "SystemSettings": {
+      "title": "SystemSettings",
+      "description": "Konfigurasi sistem bersama, termasuk token integrasi Google Drive untuk upload otomatis tanpa login.",
+      "type": "object",
+      "properties": {
+        "userEmail": {
+          "type": "string",
+          "description": "Email pemilik Google Drive target (lpdareabanten@gmail.com)",
+          "maxLength": 128
+        },
+        "accessToken": {
+          "type": "string",
+          "description": "Token akses Google Workspace yang dibagikan ke seluruh penginput",
+          "maxLength": 2048
+        },
+        "folderId": {
+          "type": "string",
+          "description": "ID folder Google Drive Laporan Inspeksi LP BU Banten",
+          "maxLength": 128
+        },
+        "folderUrl": {
+          "type": "string",
+          "description": "Tautan folder Google Drive",
+          "maxLength": 500
+        },
+        "appsScriptWebhookUrl": {
+          "type": "string",
+          "description": "URL webhook Google Apps Script untuk upload langsung tanpa kadaluarsa token",
+          "maxLength": 1000
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Waktu pembaruan konfigurasi",
+          "maxLength": 64
+        }
+      }
+    }
+  },
+  "firestore": {
+    "/inspection_reports/{reportId}": {
+      "schema": "InspectionReport",
+      "description": "Koleksi data seluruh laporan hasil inspeksi harian LP BU Banten."
+    },
+    "/test/{docId}": {
+      "schema": "TestConnection",
+      "description": "Koleksi pengujian koneksi Firestore."
+    },
+    "/system_settings/{settingId}": {
+      "schema": "SystemSettings",
+      "description": "Koleksi pengaturan sistem dan konfigurasi integrasi Google Drive bersama."
+    }
+  }
+}
